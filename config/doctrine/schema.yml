@@ -1,0 +1,59 @@
+Rol:
+  columns:
+    nombre:             { type: string(20), notnull: true }
+
+Usuario:
+  columns:
+    nombre_completo:    { type: string(255), notnull: true }
+    username:           { type: string(20), notnull: true }
+    password:           { type: string(60), notnull: true }
+    id_rol:             { type: integer, notnull: true }
+  relations:
+    Rol:
+      local:            id_rol
+      foreign:          id
+      foreignAlias:     Usuarios
+
+Tipo:
+  columns:
+    nombre:             { type: string(255), notnull: true }
+    
+Tesis:
+   columns:
+     titulo:    { type: string(255), notnull: true }
+     id_autor:  { type: integer, notnull: true }
+     tipo_id:   { type: integer, notnull: true }
+   relations:
+    sf_guard_users:
+      local:            id_autor
+      foreign:          id
+      foreignAlias:     Tesis
+    Tipos:
+      local:            tipo_id
+      foreign:          id
+      foreignAlias:     Tesis
+
+Apartado:
+  inheritance:
+    type:               concrete
+    extends:            Tesis
+  columns:
+    titulo:              { type: string(255), notnull: true }
+    introduccion:             { type: string(50000), notnull: true }
+    materiales:             { type: string(50000), notnull: true }
+    metodologia:             { type: string(50000), notnull: true }
+    procedimiento:             { type: string(50000), notnull: true }
+    resultados:             { type: string(50000), notnull: true }
+    conclusion:             { type: string(50000), notnull: true }
+    bibliografia:             { type: string(50000), notnull: true }
+    tipo_id:            { type: integer, notnull: true }
+    tesis_id:           { type: integer, notnull: true}
+  relations:
+    Tipo:
+      local:            tipo_id
+      foreign:          id
+      foreignAlias:     Apartado
+    Tesis:
+      local:            tesis_id
+      foreign:          id
+      foreignAlias:     Apartado

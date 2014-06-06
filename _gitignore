@@ -1,0 +1,9 @@
+# Lista de ignores para git
+
+# Temporales
+*~
+
+# Cache y log
+cache/*
+log/*
+
